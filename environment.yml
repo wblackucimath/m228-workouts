@@ -1,0 +1,12 @@
+name: m228-workouts
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - scipy
+  - matplotlib
+  - seaborn
+  - jupyter
+  - jupyterlab
+  - jupyter_contrib_nbextensions
+  - pandas

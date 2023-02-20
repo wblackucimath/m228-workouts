@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "m228-projects"
+authors = [
+    {name = "William Black", email = "w.black@uci.edu"},
+]
+
+readme = "README.md"
+
+requires-python = "3.10"
+
+dependencies = [
+    "numpy",
+    "scipy",
+    "matplotlib",
+    "seaborn",
+    "jupyter",
+    "jupyterlab",
+    "jupyter_contrib_nbextensions",
+    "pandas",
+]
+dynamic = ["version"]
