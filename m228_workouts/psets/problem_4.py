@@ -120,7 +120,3 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
         plt.show()
 
     plt.close()
-
-
-if __name__ == "__main__":
-    solution_4(N_sim=10**3, N_sum=10**10, save_plt=True, show_plt=True)
