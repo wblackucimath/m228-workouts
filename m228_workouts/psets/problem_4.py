@@ -9,8 +9,6 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
     plt.rcParams["text.usetex"] = True
     plt.figure(figsize=(8, 4.5))
 
-    # bern = bernoulli(p=0.5)
-
     if True:
         data = (
             binom.rvs(
@@ -57,7 +55,6 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
     histplot(
         data=data,
         stat="density",
-        # x="Close",
     )
 
     plt.grid()
