@@ -107,7 +107,7 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
     plt.legend(
         [
             f"Gaussian Kernel Density Estimate",
-            f"Naive Gaussian from Data\n Mean: ${float(np.mean(data)):.2e}$\n $\\sigma^2 = {float(np.std(data)):.2e}$",
+            f"Naive Gaussian from Data\n Mean: ${float(np.mean(data)):.2e}$\n $\\sigma^2$: ${float(np.std(data)):.2e}$",
             f"Value Density",
         ],
         loc="upper left",
