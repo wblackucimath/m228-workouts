@@ -1,0 +1,109 @@
+from seaborn import histplot
+import matplotlib.pyplot as plt
+from scipy.stats import gaussian_kde, norm, bernoulli, binom
+from importlib_resources import files
+import numpy as np
+
+
+def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=None):
+    plt.rcParams["text.usetex"] = True
+    plt.figure(figsize=(8, 4.5))
+
+    # bern = bernoulli(p=0.5)
+
+    if True:
+        data = (
+            binom.rvs(
+                size=N_sim,
+                n=N_sum,
+                p=0.5,
+            )
+            / np.sqrt(N_sum)
+            - 0.5 * np.sqrt(N_sum)
+        ) / 0.5
+        # Binomial random variable is the sum of i.i.d. Bernoulli random variables
+    else:
+        data = (
+            np.sum(
+                bernoulli.rvs(p=0.5, size=(N_sim, N_sum)),
+                axis=1,
+            )
+            / np.sqrt(N_sum)
+            - 0.5 * np.sqrt(N_sum)
+        ) / 0.5
+
+    def kde(x):
+        return gaussian_kde(data).pdf(x.T)
+
+    def pdf(x):
+        return norm.pdf(
+            x,
+            loc=np.mean(data),
+            scale=np.std(data),
+        )
+
+    X_plot = np.linspace(data.min(), data.max(), 500)
+
+    plt.plot(
+        X_plot,
+        kde(X_plot),
+        c="orange",
+    )
+    plt.plot(
+        X_plot,
+        pdf(X_plot),
+        c="r",
+    )
+    histplot(
+        data=data,
+        stat="density",
+        # x="Close",
+    )
+
+    plt.grid()
+
+    plt.title(
+        "The Distribution for "
+        + r"$\displaystyle{\frac{1}{\sqrt{"
+        + f"{N_sum:.2e}"
+        + r"}} \sum_{n = 1}^{"
+        + f"{N_sum:.2e}"
+        + r"} X_n}$"
+        + r"with $"
+        + f"{N_sim:.2e}"
+        + r"$ samples."
+    )
+
+    plt.xlabel(
+        "Value of "
+        + r"$\displaystyle{\frac{1}{\sqrt{"
+        + f"{N_sum:.2e}"
+        + r"}} \sum_{n = 1}^{"
+        + f"{N_sum:.2e}"
+        + r"} X_n}$"
+    )
+    plt.ylabel("Density")
+
+    plt.legend(
+        [
+            f"Gaussian Kernel Density Estimate",
+            f"Naive Gaussian from Data\n (Mean: ${float(np.mean(data)):.2e}$, $\\sigma^2 = {float(np.std(data)):.2e}$)",
+            f"Value Density",
+        ],
+        loc="upper left",
+    )
+
+    plt.tight_layout()
+
+    if save_plt:
+        if fname is None:
+            fname = "CLT.png"
+        plt.savefig(files("m228_workouts.plots").joinpath(fname))
+    if show_plt:
+        plt.show()
+
+    plt.close()
+
+
+if __name__ == "__main__":
+    solution_4(N_sim=10**6, N_sum=10**10, save_plt=True, show_plt=True)
