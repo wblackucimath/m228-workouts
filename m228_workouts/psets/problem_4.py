@@ -64,30 +64,50 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
 
     plt.title(
         "The Distribution for "
-        + r"$\displaystyle{\frac{1}{\sqrt{"
+        r"$\displaystyle{"
+        + r"2 \left ("
+        + r"\frac{1}{\sqrt{"
+        + f"n"
+        + r"}}"
+        + r"\sum_{n = 1}^{"
+        + f"n"
+        + r"}"
+        + r"X_n"
+        + r"- \frac{1}{2} \sqrt{n}"
+        + r"\right )"
+        + r"}$"
+        + r" with $n = "
         + f"{N_sum:.2e}"
-        + r"}} \sum_{n = 1}^{"
-        + f"{N_sum:.2e}"
-        + r"} X_n}$"
-        + r"with $"
+        + r"$ "
+        + r"and $"
         + f"{N_sim:.2e}"
         + r"$ samples."
     )
 
     plt.xlabel(
         "Value of "
-        + r"$\displaystyle{\frac{1}{\sqrt{"
+        + r"$\displaystyle{"
+        + r"2 \left ("
+        + r"\frac{1}{\sqrt{"
+        + f"n"
+        + r"}}"
+        + r"\sum_{n = 1}^{"
+        + f"n"
+        + r"}"
+        + r"X_n"
+        + r"- \frac{1}{2} \sqrt{n}"
+        + r"\right )"
+        + r"}$"
+        + r" with $n = "
         + f"{N_sum:.2e}"
-        + r"}} \sum_{n = 1}^{"
-        + f"{N_sum:.2e}"
-        + r"} X_n}$"
+        + r"$"
     )
     plt.ylabel("Density")
 
     plt.legend(
         [
             f"Gaussian Kernel Density Estimate",
-            f"Naive Gaussian from Data\n (Mean: ${float(np.mean(data)):.2e}$, $\\sigma^2 = {float(np.std(data)):.2e}$)",
+            f"Naive Gaussian from Data\n Mean: ${float(np.mean(data)):.2e}$\n $\\sigma^2 = {float(np.std(data)):.2e}$",
             f"Value Density",
         ],
         loc="upper left",
@@ -106,4 +126,4 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
 
 
 if __name__ == "__main__":
-    solution_4(N_sim=10**6, N_sum=10**10, save_plt=True, show_plt=True)
+    solution_4(N_sim=10**3, N_sum=10**10, save_plt=True, show_plt=True)
