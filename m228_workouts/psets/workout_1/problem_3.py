@@ -71,3 +71,6 @@ def solution_3(period="2y", show_plt=False, save_plt=True, fname=None):
         plt.show()
 
     plt.close()
+
+    
+    return float(R.mean()), float(R.std())

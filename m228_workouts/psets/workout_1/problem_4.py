@@ -11,24 +11,20 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
 
     if True:
         data = (
-            binom.rvs(
+            2
+            * binom.rvs(
                 size=N_sim,
                 n=N_sum,
                 p=0.5,
             )
-            / np.sqrt(N_sum)
-            - 0.5 * np.sqrt(N_sum)
-        ) / 0.5
+            - N_sum
+        ) / np.sqrt(N_sum)
         # Binomial random variable is the sum of i.i.d. Bernoulli random variables
     else:
-        data = (
-            np.sum(
-                bernoulli.rvs(p=0.5, size=(N_sim, N_sum)),
-                axis=1,
-            )
-            / np.sqrt(N_sum)
-            - 0.5 * np.sqrt(N_sum)
-        ) / 0.5
+        data = np.sum(
+            2 * bernoulli.rvs(p=0.5, size=(N_sim, N_sum)) - 1,
+            axis=1,
+        ) / np.sqrt(N_sum)
 
     def kde(x):
         return gaussian_kde(data).pdf(x.T)
@@ -67,7 +63,6 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
     plt.title(
         "The Distribution for "
         r"$\displaystyle{"
-        + r"2 \left ("
         + r"\frac{1}{\sqrt{"
         + f"n"
         + r"}}"
@@ -75,8 +70,6 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
         + f"n"
         + r"}"
         + r"X_n"
-        + r"- \frac{1}{2} \sqrt{n}"
-        + r"\right )"
         + r"}$"
         + r" with $n = "
         + f"{N_sum:.2e}"
@@ -89,7 +82,6 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
     plt.xlabel(
         "Value of "
         + r"$\displaystyle{"
-        + r"2 \left ("
         + r"\frac{1}{\sqrt{"
         + f"n"
         + r"}}"
@@ -97,8 +89,6 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
         + f"n"
         + r"}"
         + r"X_n"
-        + r"- \frac{1}{2} \sqrt{n}"
-        + r"\right )"
         + r"}$"
         + r" with $n = "
         + f"{N_sum:.2e}"
