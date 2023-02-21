@@ -1,10 +1,9 @@
 import yfinance as yf
-from seaborn import displot, histplot
+from seaborn import histplot
 import matplotlib.pyplot as plt
 from scipy.stats import gaussian_kde, norm
-from scipy.optimize import curve_fit
 from importlib_resources import files
-import numpy as np
+from numpy import linspace
 
 
 def solution_3(period="2y", show_plt=False, save_plt=True, fname=None):
@@ -28,7 +27,7 @@ def solution_3(period="2y", show_plt=False, save_plt=True, fname=None):
             scale=R.std(),
         )
 
-    X_plot = np.linspace(R.min(), R.max(), 500)
+    X_plot = linspace(R.min(), R.max(), 500)
 
     plt.plot(
         X_plot,
@@ -40,7 +39,6 @@ def solution_3(period="2y", show_plt=False, save_plt=True, fname=None):
         pdf(X_plot),
         c="r",
     )
-
     histplot(
         data=R,
         stat="density",
@@ -68,12 +66,8 @@ def solution_3(period="2y", show_plt=False, save_plt=True, fname=None):
     if save_plt:
         if fname is None:
             fname = "SPX_Histogram.png"
-        plt.savefig(files("m228-workouts.plots").joinpath(fname))
+        plt.savefig(files("m228_workouts.plots").joinpath(fname))
     if show_plt:
         plt.show()
 
     plt.close()
-
-
-if __name__ == "__main__":
-    solution_3("5y", show_plt=True)
