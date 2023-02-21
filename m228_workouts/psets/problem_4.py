@@ -44,13 +44,18 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
 
     plt.plot(
         X_plot,
+        norm.pdf(X_plot),
+        c="green",
+    )
+    plt.plot(
+        X_plot,
         kde(X_plot),
         c="orange",
     )
     plt.plot(
         X_plot,
         pdf(X_plot),
-        c="r",
+        c="red",
     )
     histplot(
         data=data,
@@ -103,6 +108,7 @@ def solution_4(N_sim=10**4, N_sum=10**4, show_plt=False, save_plt=True, fname=No
 
     plt.legend(
         [
+            f"Standard Normal Gaussian",
             f"Gaussian Kernel Density Estimate",
             f"Naive Gaussian from Data\n Mean: ${float(np.mean(data)):.2e}$\n $\\sigma^2$: ${float(np.std(data)):.2e}$",
             f"Value Density",
