@@ -22,7 +22,7 @@ def solution_3(period="2y"):
             "Return Amount",
         ]
     )
-
+    plt.tight_layout()
     plt.show()
     plt.close()
 
